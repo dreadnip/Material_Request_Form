@@ -1,0 +1,3 @@
+what if there are more than one item with the same ID?
+the query: ("SELECT * FROM GAGE WHERE gage_id =" + gage_id)
+will still return all the options. so how does the user choose which option?
