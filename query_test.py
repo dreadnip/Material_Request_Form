@@ -17,6 +17,7 @@ def create_connection(db_file):
     return conn
 
 
+# TODO: how to assign each column in the query return to a variable.
 def select_item(conn, gage_id):
     """
     Select item from gage
@@ -25,7 +26,7 @@ def select_item(conn, gage_id):
     :return: rows
     """
     cur = conn.cursor()
-    cur.execute("SELECT * FROM GAGE WHERE gage_id = " + gage_id + ';')
+    cur.execute("SELECT * FROM GAGE WHERE gage_id = " + "'" + gage_id + "'")
 
     rows = cur.fetchall()
 
@@ -37,10 +38,12 @@ def main():
 
     # create a database connection
     conn = create_connection(database)
+    gage_id = str(input("GAGE ID: ").upper())
     with conn:
         print("item: ")
-        select_item(conn, 'A4455')
+        print(select_item(conn, gage_id))
 
 
+# test pycharm built in commits
 if __name__ == '__main__':
     main()
