@@ -28,3 +28,17 @@ while True:
         items.append(new_item)
         print(items)
     # if 2 then print current list of items
+
+    # todo: show list of items
+
+    # todo:use company and dictionary to obtain shipping info
+
+    # todo: edit the mrf
+
+    # todo: use openpyxl to write the template
+
+    # todo: use time stamps to create file save name
+
+    # todo: create dictionary address book ( key = vendor, value = tuple(address lines) )
+
+    
