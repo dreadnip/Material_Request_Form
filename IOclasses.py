@@ -6,12 +6,11 @@
 # ------------------------------------------------------------------------ #
 if __name__ == "__main__":
     raise Exception("This file is not meant to ran by itself")
+from query import QueryGage as q
+from Data import Item
+items = []
 
-import Data
-import query_test as item
-
-
-class IO(item):
+class IO:
     """  A class for performing Item Input and Output
 
        methods:
@@ -48,7 +47,7 @@ class IO(item):
         return choice
 
     @staticmethod
-    def input_item_data(item):
+    def input_item_data():
         """ Gets data for an item object
 
         :return: (item) object with input data
@@ -57,8 +56,23 @@ class IO(item):
             gageid = (input("GAGE ID#: ").strip())
             price = str(input("PRICE: ")).strip()
             quantity = str(input('QUANTITY: ')).strip()
+            # connect to DB
+            conn = q.create_connection()
+            # create item
+            asset = q.select_item(conn, gageid)
+            # unpack tuple
+            (gage_id, desc, company, serial_num, manufacturer, model_num, cert_template) = asset
+            # hydrate Item object
+            items.append(Item(gage_id, model_num, serial_num, manufacturer, desc, company,
+                              cert_template, price, quantity))
             print()  # Add an extra line for looks
-            new_item = Data.Item(gageid, model_num, serial_num, mfg, desc, price, quantity)
+
         except Exception as e:
             print(e)
-        return new_item
+        return items
+
+    # get gage_id for isolated use in other modules
+    @staticmethod
+    def get_gage_id():
+        gage_id = input("Gage ID: ").strip().upper()
+        return gage_id

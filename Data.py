@@ -7,7 +7,7 @@
 if __name__ == "__main__":
     raise Exception("This file is not meant to ran by itself")
 
-# import query_test as item
+
 
 
 # Data ------------------------------------------------------------------- #
@@ -25,6 +25,8 @@ class Item(object):
 
         desc = description of item
 
+        company = client company
+
         price = quoted price
 
         quantity = quantity
@@ -39,13 +41,15 @@ class Item(object):
     """
 
     # -- Constructor --
-    def __init__(self, gage_id, model_num, serial_num, mfg, desc, price, quantity):
+    def __init__(self, gage_id, model_num, serial_num, mfg, desc, company, cert_template, price, quantity):
         # -- Attributes --
         self.__gage_id = gage_id
         self.__model_num = model_num
         self.__serial_num = serial_num
         self.__mfg = mfg
         self.__desc = desc
+        self.__company = company
+        self.cert_template = cert_template
         self.__price = price
         self.__quantity = quantity
 
@@ -91,6 +95,22 @@ class Item(object):
         self.__desc = value
 
     @property
+    def company(self):
+        return str(self.__company).strip()
+
+    @company.setter
+    def company(self, value):
+        self.__company = value
+
+    @property
+    def cert_template(self):
+        return str(self.__cert_template).strip()
+
+    @cert_template.setter
+    def cert_template(self, value):
+        self.__cert_template = value
+
+    @property
     def price(self):
         return str(self.__price)
 
@@ -119,7 +139,8 @@ class Item(object):
 
     def __repr__(self):
         """ Implicitly returns a list with this object's data """
-        return repr([self.gage_id, self.model_num, self.serial_num, self.mfg, self.desc, self.price, self.quantity])
+        return repr([self.gage_id, self.model_num, self.serial_num, self.mfg, self.desc,
+                     self.company, self.cert_template, self.price, self.quantity])
 
 # Processing ------------------------------------------------------------- #
 

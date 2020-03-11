@@ -5,11 +5,14 @@
 # ------------------------------------------------------------------------ #
 import sqlite3
 from sqlite3 import Error
-from IOclasses import
+# from IOclasses import IO
+from Data import Item
 
-database = r"C:\Users\alcom\Documents\otv_v2\GageInsight.db"
-class FetchItem():
-    def create_connection(db_file):
+
+class QueryGage:
+
+    @staticmethod
+    def create_connection():
         """ create a database connection to the SQLite database
             specified by the db_file
         :param db_file: database file
@@ -17,45 +20,42 @@ class FetchItem():
         """
         conn = None
         try:
-            conn = sqlite3.connect(db_file)
+            conn = sqlite3.connect(r"C:\Users\alcom\Documents\otv_v2\GageInsight.db")
         except Error as e:
             print(e)
 
         return conn
 
-
-    # TODO: how to assign each column in the query return to a variable.
-    def select_item(conn, gage_id):
+    # TODO: what if there are more than one item per gage_ID?
+    @staticmethod
+    def select_item(conn, gid):
         """
         Select item from gage
         :param conn: the Connection object
-        :param gage_id: string for gage id
+        :param gid: string for gage id
         :return: rows
         """
         cur = conn.cursor()
-        cur.execute("SELECT * FROM GAGE WHERE gage_id = " + "'" + gage_id + "'")
+        cur.execute("SELECT * FROM GAGE WHERE gage_id = " + "'" + gid + "'")
 
         rows = cur.fetchall()
-        asset = rows[0]
+        row = rows[0]
 
-        return asset
+        return row
 
     # unpack a tuple with all item information into assigned variables.
+    @staticmethod
+    def get_gage_id():
+        gid = input("Gage ID: ").strip().upper()
+        return gid
 
-
-    def main():
-
-
-        # create a database connection
-        conn = create_connection(database)
-        g_id = str(input("GAGE ID: ").upper())
-        with conn:
-            item = select_item(conn, g_id)
-            (gage_id, desc, company, serial_num, manufacturer, model_num, cert_template) = item
-            print("Item: ")
-            print(gage_id)
-            print()
-
-
-
-
+    # # connect to DB
+    # conn = QueryGage.create_connection(DATABASE)
+    #
+    # # create item
+    # item = select_item(conn, get_gage_id())
+    #
+    # # # unpack item
+    # # (gage_id, desc, company, serial_num, manufacturer, model_num, cert_template) = item
+    #
+    # (Item.gage_id, Item.desc, Item.company, Item.serial_num, Item.mfg, Item.model_num, Item.cert_template) = item
