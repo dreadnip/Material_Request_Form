@@ -4,11 +4,11 @@
 # ChangeLog (Who,When,What):
 # Acompeau, <date>, created file
 # ------------------------------------------------------------------------ #
-if __name__ == "__main__":
-    raise Exception("This file is not meant to ran by itself")
 from query import QueryGage as q
 from Data import Item
-items = []
+
+if __name__ == "__main__":
+    raise Exception("This file is not meant to ran by itself")
 
 class IO:
     """  A class for performing Item Input and Output
@@ -52,24 +52,23 @@ class IO:
 
         :return: (item) object with input data
         """
+
+
         try:
             gageid = (input("GAGE ID#: ").strip())
             price = str(input("PRICE: ")).strip()
             quantity = str(input('QUANTITY: ')).strip()
-            # connect to DB
-            conn = q.create_connection()
-            # create item
-            asset = q.select_item(conn, gageid)
+            item = q.fetch(gageid)
             # unpack tuple
-            (gage_id, desc, company, serial_num, manufacturer, model_num, cert_template) = asset
+            (gage_id, desc, company, serial_num, manufacturer, model_num, cert_template) = item
             # hydrate Item object
-            items.append(Item(gage_id, model_num, serial_num, manufacturer, desc, company,
-                              cert_template, price, quantity))
+            # item = Item(gage_id, model_num, serial_num, manufacturer, desc, company,
+            #             cert_template, price, quantity)
             print()  # Add an extra line for looks
 
         except Exception as e:
             print(e)
-        return items
+        return list(item)
 
     # get gage_id for isolated use in other modules
     @staticmethod

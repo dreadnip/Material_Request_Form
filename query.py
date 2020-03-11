@@ -5,8 +5,6 @@
 # ------------------------------------------------------------------------ #
 import sqlite3
 from sqlite3 import Error
-# from IOclasses import IO
-from Data import Item
 
 
 class QueryGage:
@@ -49,12 +47,15 @@ class QueryGage:
         gid = input("Gage ID: ").strip().upper()
         return gid
 
-    # # connect to DB
-    # conn = QueryGage.create_connection(DATABASE)
+    @staticmethod
+    def fetch(gid):
+        # # connect to DB
+        conn = QueryGage.create_connection()
+
+        # create item
+        item = QueryGage.select_item(conn, gid)
     #
-    # # create item
-    # item = select_item(conn, get_gage_id())
-    #
+        return item
     # # # unpack item
     # # (gage_id, desc, company, serial_num, manufacturer, model_num, cert_template) = item
     #

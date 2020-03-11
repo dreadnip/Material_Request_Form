@@ -28,7 +28,7 @@ while True:
     # if 1 then allow user to enter gage_id, quantity and price
     if IO.input_menu_choice() == '1':
         # IO.input_item_data()
-        print(IO.input_item_data())
+        new_item = IO.input_item_data()
     # if 2 then print current list of items
 
 
