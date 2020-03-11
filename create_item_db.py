@@ -39,20 +39,20 @@ def create_table(conn, create_table_sql):
 
 # create item to place in db
 def create_item(conn, xlpath, tablename):
-    df = pd.read_excel(xlpath, index_col=0)     # usecols="A:C, E" to take only the columns I want
+    df = pd.read_excel(xlpath, index_col=0, usecols="A,D,G:J,L")     # usecols="A:C, E" to take only the columns I want
     """
     Create a new item into the items table
     :param conn:
     :param xlpath: input path to the excel file with all the data
     :param: tablename: name of the table with all of the excel data
-    :return: 
+    :return: (gage_id, desc, company, serial_num, manufacturer, model_num, cert_template)db
     """
     df.to_sql(name=tablename, con=conn, if_exists="append")
 
 
 def main():
     database = r"C:\Users\alcom\Documents\otv_v2\GageInsight.db"
-    excel = r"C:\Users\alcom\Documents\otv_v2\inventory.xlsx"
+    excel = r"C:\Users\alcom\Documents\otv_v2\Inventory_all_031020.xlsx"
 
     # sql_create_items = """ CREATE TABLE IF NOT EXISTS items (
     #                                     gage_id text PRIMARY KEY,

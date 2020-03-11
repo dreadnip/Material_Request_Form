@@ -7,8 +7,11 @@
 if __name__ == "__main__":
     raise Exception("This file is not meant to ran by itself")
 
+import Data
+import query_test as item
 
-class IO:
+
+class IO(item):
     """  A class for performing Item Input and Output
 
        methods:
@@ -19,6 +22,7 @@ class IO:
 
 
        """
+
     @staticmethod
     def print_menu_items():
         """ Print a menu of choices to the user  """
@@ -43,9 +47,8 @@ class IO:
         print()  # Add an extra line for looks
         return choice
 
-
     @staticmethod
-    def input_item_data():
+    def input_item_data(item):
         """ Gets data for an item object
 
         :return: (item) object with input data
@@ -55,7 +58,7 @@ class IO:
             price = str(input("PRICE: ")).strip()
             quantity = str(input('QUANTITY: ')).strip()
             print()  # Add an extra line for looks
-            # thing = Data.Item(gageid, model_num, serial_num, mfg, desc, price, quantity)
+            new_item = Data.Item(gageid, model_num, serial_num, mfg, desc, price, quantity)
         except Exception as e:
             print(e)
         return new_item

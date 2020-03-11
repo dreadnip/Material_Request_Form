@@ -29,8 +29,11 @@ def select_item(conn, gage_id):
     cur.execute("SELECT * FROM GAGE WHERE gage_id = " + "'" + gage_id + "'")
 
     rows = cur.fetchall()
+    asset = rows[0]
 
-    return rows
+    return asset
+
+# unpack a tuple with all item information into assigned variables.
 
 
 def main():
@@ -38,12 +41,14 @@ def main():
 
     # create a database connection
     conn = create_connection(database)
-    gage_id = str(input("GAGE ID: ").upper())
+    g_id = str(input("GAGE ID: ").upper())
     with conn:
-        print("item: ")
-        print(select_item(conn, gage_id))
+        item = select_item(conn, g_id)
+        (gage_id, desc, company, serial_num, manufacturer, model_num, cert_template) = item
+        print("Item: ")
+        print(gage_id)
+        print()
 
 
-# test pycharm built in commits
 if __name__ == '__main__':
     main()
