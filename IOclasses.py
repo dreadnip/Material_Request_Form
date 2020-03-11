@@ -10,6 +10,7 @@ from Data import Item
 if __name__ == "__main__":
     raise Exception("This file is not meant to ran by itself")
 
+
 class IO:
     """  A class for performing Item Input and Output
 
@@ -53,22 +54,27 @@ class IO:
         :return: (item) object with input data
         """
 
-
         try:
-            gageid = (input("GAGE ID#: ").strip())
-            price = str(input("PRICE: ")).strip()
-            quantity = str(input('QUANTITY: ')).strip()
-            item = q.fetch(gageid)
+            gageid = input("GAGE ID#: ").strip().upper()
+            Item.price = str(input("PRICE: ")).strip()
+            Item.quantity = str(input('QUANTITY: ')).strip()
+            asset = q.fetch(gageid)
             # unpack tuple
-            (gage_id, desc, company, serial_num, manufacturer, model_num, cert_template) = item
+            (Item.gage_id, Item.desc, Item.company, Item.serial_num, Item.mfg,
+             Item.model_num, Item.cert_template) = asset
             # hydrate Item object
-            # item = Item(gage_id, model_num, serial_num, manufacturer, desc, company,
-            #             cert_template, price, quantity)
+            # new_item = Item(gage_id, model_num, serial_num, manufacturer, desc, company,
+            #                 cert_template, price, quantity)
+            # new_item2 = [Item.gage_id, Item.desc, Item.company, Item.serial_num, Item.mfg,
+            #              Item.model_num, Item.cert_template, Item.price, Item.quantity]
             print()  # Add an extra line for looks
 
         except Exception as e:
             print(e)
-        return list(item)
+
+        # todo: figure out how to return a list by calling the object
+        return [Item.gage_id, Item.desc, Item.company, Item.serial_num, Item.mfg,
+                Item.model_num, Item.cert_template, Item.price, Item.quantity]
 
     # get gage_id for isolated use in other modules
     @staticmethod

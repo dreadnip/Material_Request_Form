@@ -10,11 +10,8 @@
 
 # Imports
 from IOclasses import IO
-# from Data import Item as asset
-# # from query import FetchItem
-
-
-
+import Data
+items = []
 # Presentation ---------------------------------------------------------- #
 while True:
     IO.print_menu_items()
@@ -27,8 +24,7 @@ while True:
 
     # if 1 then allow user to enter gage_id, quantity and price
     if IO.input_menu_choice() == '1':
-        # IO.input_item_data()
         new_item = IO.input_item_data()
+        items.append(new_item)
+        print(items)
     # if 2 then print current list of items
-
-

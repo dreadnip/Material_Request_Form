@@ -49,7 +49,7 @@ class Item(object):
         self.__mfg = mfg
         self.__desc = desc
         self.__company = company
-        self.cert_template = cert_template
+        self.__cert_template = cert_template
         self.__price = price
         self.__quantity = quantity
 
