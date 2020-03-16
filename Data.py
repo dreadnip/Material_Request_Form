@@ -8,8 +8,6 @@ if __name__ == "__main__":
     raise Exception("This file is not meant to ran by itself")
 
 
-
-
 # Data ------------------------------------------------------------------- #
 class Item(object):
     """Stores data about an item:
@@ -41,7 +39,7 @@ class Item(object):
     """
 
     # -- Constructor --
-    def __init__(self, gage_id, model_num, serial_num, mfg, desc, company, cert_template, price, quantity):
+    def __init__(self, gage_id, desc, company, serial_num, mfg, model_num, cert_template, price, quantity):
         # -- Attributes --
         self.__gage_id = gage_id
         self.__model_num = model_num
@@ -134,6 +132,9 @@ class Item(object):
     def description(self):
         return str(self.desc + ';' + self.serial_num + ";" + self.gage_id)
 
+    def mrf_list_format(self):
+        return repr(["Model: " + self.model_num, self.mfg, self.desc + ';' + self.serial_num + ";" + self.gage_id,
+                     self.quantity, self.price])
     # def __iter__(self):
     #     return self
 

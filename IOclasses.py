@@ -10,15 +10,24 @@ from Data import Item
 if __name__ == "__main__":
     raise Exception("This file is not meant to ran by itself")
 
+new_item = []
+
+
+
+
 
 class IO:
     """  A class for performing Item Input and Output
 
        methods:
 
-           print_menu_items():
+           print_menu_items(): prints the menu items
 
-           input_menu_choice():
+           input_menu_choice(): asks user for choice input, returns choice
+
+           input_item_data(): returns list of item attributes
+
+
 
 
        """
@@ -47,6 +56,31 @@ class IO:
         print()  # Add an extra line for looks
         return choice
 
+    # get gage_id for isolated use in other modules
+    @staticmethod
+    def get_gage_id():
+        gage_id = input("Gage ID: ").strip().upper()
+        return gage_id
+
+    # todo: define try:except block
+    @staticmethod
+    def get_price():
+        try:
+            price = float(input("Price: ").strip())
+            return price
+        except Exception as e:
+            print(e)
+
+
+    # todo: define try:except block
+    @staticmethod
+    def get_quantity():
+        try:
+            quantity = int(input("Quantity: ").strip())
+            return quantity
+        except Exception as e:
+            print(e)
+
     @staticmethod
     def input_item_data():
         """ Gets data for an item object
@@ -54,14 +88,19 @@ class IO:
         :return: (item) object with input data
         """
 
+        global new_item
         try:
-            gageid = input("GAGE ID#: ").strip().upper()
+            Item.gage_id = input("GAGE ID#: ").strip().upper()
             Item.price = str(input("PRICE: ")).strip()
             Item.quantity = str(input('QUANTITY: ')).strip()
-            asset = q.fetch(gageid)
+            #asset = q.fetch(gageid)
+            #new_item = Item(*asset, price, quantity)
             # unpack tuple
-            (Item.gage_id, Item.desc, Item.company, Item.serial_num, Item.mfg,
-             Item.model_num, Item.cert_template) = asset
+            # (Item.gage_id, Item.desc, Item.company, Item.serial_num, Item.mfg,
+            #  Item.model_num, Item.cert_template) = asset
+
+            # new_item = Item(*asset)
+
             # hydrate Item object
             # new_item = Item(gage_id, model_num, serial_num, manufacturer, desc, company,
             #                 cert_template, price, quantity)
@@ -73,11 +112,4 @@ class IO:
             print(e)
 
         # todo: figure out how to return a list by calling the object
-        return [Item.gage_id, Item.desc, Item.company, Item.serial_num, Item.mfg,
-                Item.model_num, Item.cert_template, Item.price, Item.quantity]
-
-    # get gage_id for isolated use in other modules
-    @staticmethod
-    def get_gage_id():
-        gage_id = input("Gage ID: ").strip().upper()
-        return gage_id
+        return new_item

@@ -10,8 +10,14 @@
 
 # Imports
 from IOclasses import IO
-import Data
+from ExcelWrite import XL
+from Data import Item
+from query import QueryGage as query
+import pickle
+
 items = []
+xliste = []
+savedir = r"C:\Users\alcom\Documents\otv_v2\gitignore"
 # Presentation ---------------------------------------------------------- #
 while True:
     IO.print_menu_items()
@@ -24,21 +30,37 @@ while True:
 
     # if 1 then allow user to enter gage_id, quantity and price
     if IO.input_menu_choice() == '1':
-        new_item = IO.input_item_data()
+        # instantiate new item
+        new_item = Item(*query.fetch(IO.get_gage_id()), IO.get_price(), IO.get_quantity())
+        # add item to list of items to print for user
         items.append(new_item)
-        print(items)
-    # if 2 then print current list of items
+        # add item in stupid MRF formatting to xliste
+        xliste.append(new_item.mrf_list_format())
+        continue
 
     # todo: show list of items
-
+    # if choice = 2 then show list of current items being sent out
+    if IO.input_menu_choice() == '2':
+        for item in items:
+            print(item)
+        continue
     # todo:use company and dictionary to obtain shipping info
 
     # todo: edit the mrf
 
-    # todo: use openpyxl to write the template
+    # todo: use pandas? to write the template
+    # if choice = 3 then write the items to excel
+    if IO.input_menu_choice() == '3':
+        # pickle the xl_liste to be used to write the dumb xl format
+        with open('xliste.pickle', 'wb') as f:
+            pickle.dump(xliste, f)
 
+        XL.xl_write('xliste.pickle', savedir, "test01")
+        #XL.xlsave(savedir, "test01")
     # todo: use time stamps to create file save name
 
     # todo: create dictionary address book ( key = vendor, value = tuple(address lines) )
 
-    
+    # todo: create a setup class that will ask for the users name, use 'default keyword argument'
+    #  and user input inside xlwrite parameters.
+

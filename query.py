@@ -24,7 +24,7 @@ class QueryGage:
 
         return conn
 
-    # TODO: what if there are more than one item per gage_ID?
+    # TODO: what if there is more than one item per gage_ID?
     @staticmethod
     def select_item(conn, gid):
         """
@@ -41,12 +41,6 @@ class QueryGage:
 
         return row
 
-    # unpack a tuple with all item information into assigned variables.
-    @staticmethod
-    def get_gage_id():
-        gid = input("Gage ID: ").strip().upper()
-        return gid
-
     @staticmethod
     def fetch(gid):
         # # connect to DB
@@ -54,9 +48,6 @@ class QueryGage:
 
         # create item
         item = QueryGage.select_item(conn, gid)
-    #
+
         return item
-    # # # unpack item
-    # # (gage_id, desc, company, serial_num, manufacturer, model_num, cert_template) = item
-    #
-    # (Item.gage_id, Item.desc, Item.company, Item.serial_num, Item.mfg, Item.model_num, Item.cert_template) = item
+
