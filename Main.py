@@ -31,14 +31,13 @@ while True:
     # if 1 then allow user to enter gage_id, quantity and price
     if IO.input_menu_choice() == '1':
         # instantiate new item
-        new_item = Item(*query.fetch(IO.get_gage_id()), IO.get_price(), IO.get_quantity())
+        new_item = Item(*query.fetch(IO.get_gage_id()), IO.get_price(), IO.get_quantity())      # can I name this the asset number?
         # add item to list of items to print for user
         items.append(new_item)
         # add item in stupid MRF formatting to xliste
         xliste.append(new_item.mrf_list_format())
         continue
 
-    # todo: show list of items
     # if choice = 2 then show list of current items being sent out
     if IO.input_menu_choice() == '2':
         for item in items:
@@ -47,8 +46,6 @@ while True:
     # todo:use company and dictionary to obtain shipping info
 
     # todo: edit the mrf
-
-    # todo: use pandas? to write the template
     # if choice = 3 then write the items to excel
     if IO.input_menu_choice() == '3':
         # pickle the xl_liste to be used to write the dumb xl format
@@ -57,7 +54,7 @@ while True:
 
         XL.xl_write('xliste.pickle', savedir, "test01")
         #XL.xlsave(savedir, "test01")
-    # todo: use time stamps to create file save name
+
 
     # todo: create dictionary address book ( key = vendor, value = tuple(address lines) )
 
