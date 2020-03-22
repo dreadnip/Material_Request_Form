@@ -2,7 +2,7 @@
 ### I've been smoking on gitbash all day bby
 
 Here's my baby, I've been working on her for a long time. I've gotten this far. There is still a long way to go. At this point I can use it at work. The biggest speed increase for works sake is: sometimes we send out 20 items to the vendor. Each item has been hand typed for 15 years!<br/>
- I just added all the essential files to a "MAIN" folder as seen on the repository. I don't know if this #$%$ed everything up or not.<br/><br/> I also went back and wrote the paths that I had hard coded as `os.getcwd()`, so I think the program should work on someone else's machine. If you don't have excel (I assume you use some sort of sick hippy free dev master linux l33t trash) I don't know if the `openpyxl` module will work for you. So maybe just read through my code and see where I'm especially a gaper.<br/><br/> I'll list the additions I want to make later in the post.
+ I just added all the essential files to a "MAIN" folder as seen on the repository. I don't know if this #$%$ed everything up or not.<br/><br/> I also went back and wrote the paths that I had hard coded as `os.getcwd()`, so I think the program should work on someone else's machine. If you don't have excel (I assume you use some sort of sick hippy free dev master linux libreoffice anti-establishment nonsense) I don't know if the `openpyxl` module will work for you. So maybe just read through my code and see where I'm especially a gaper.<br/><br/> I'll list the additions I want to make later in the post.
 
 __It should be noted: use 'b-0325' and 'a6258' as gage_id queries as test IDs__
 ## Questions for Sandy:
