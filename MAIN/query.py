@@ -5,6 +5,7 @@
 # ------------------------------------------------------------------------ #
 import sqlite3
 from sqlite3 import Error
+import os
 
 
 class QueryGage:
@@ -18,7 +19,7 @@ class QueryGage:
         """
         conn = None
         try:
-            conn = sqlite3.connect(r"C:\Users\alcom\Documents\otv_v2\GageInsight.db")
+            conn = sqlite3.connect(os.getcwd() + "\\GageInsight.db")
         except Error as e:
             print(e)
 
