@@ -31,16 +31,19 @@ class Item(object):
 
 
     methods:
+        to_string: I dont know what this does, leftover from the old class template
 
+        description: adds the properties description, serial number, and ID# together for the outdated MRF program
 
-    changelog: (When,Who,What)
-        ASC, 0222320, CREATED FILE
-        ASC. 022520. ADDED PRICE/ QUANTITY
+        mrf_list_format: re-orders the list and adds the description piece into the list, for easy iteration in the
+        excel write function
+
     """
 
     # -- Constructor --
-    def __init__(self, gage_id, desc, company, serial_num, mfg, model_num, cert_template, price, quantity):
+    def __init__(self, index, gage_id, desc, company, serial_num, mfg, model_num, cert_template, price, quantity):
         # -- Attributes --
+        self.__index = index
         self.__gage_id = gage_id
         self.__model_num = model_num
         self.__serial_num = serial_num
@@ -52,6 +55,14 @@ class Item(object):
         self.__quantity = quantity
 
     # -- Properties --
+    @property
+    def index(self):
+        return str(self.__index).strip()
+
+    @index.setter
+    def index(self, value):
+        self.__index = value
+
     @property
     def gage_id(self):
         return str(self.__gage_id).strip()
@@ -124,7 +135,7 @@ class Item(object):
     def quantity(self, value):
         self.__quantity = value
 
-    # -- Methods --
+    # -- Methods -- #
     def to_string(self):
         """ Explicitly returns a string with this object's data """
         return self.__str__()
@@ -133,17 +144,63 @@ class Item(object):
         return str(self.desc + ';' + self.serial_num + ";" + self.gage_id)
 
     def mrf_list_format(self):
-        return repr(["Model: " + self.model_num, self.mfg, self.desc + ';' + self.serial_num + ";" + self.gage_id,
-                     self.quantity, self.price])
+        return list(
+            [self.index, "Model: " + self.model_num, self.mfg, self.desc + ';' + self.serial_num + ";" + self.gage_id,
+             self.quantity, self.price])
+
+    def to_list(self):
+        return list([self.index, self.gage_id, self.model_num, self.serial_num, self.mfg, self.desc,
+                     self.company, self.cert_template, self.price, self.quantity])
+
     # def __iter__(self):
     #     return self
 
     def __repr__(self):
         """ Implicitly returns a list with this object's data """
-        return repr([self.gage_id, self.model_num, self.serial_num, self.mfg, self.desc,
+        return repr([self.index, self.gage_id, self.model_num, self.serial_num, self.mfg, self.desc,
                      self.company, self.cert_template, self.price, self.quantity])
 
-# Processing ------------------------------------------------------------- #
+
+class User(object):
+    """Stores information about the user:
+
+    Properties:
+        initials = users initials
+        full_name = users full name
+
+    methods:
 
 
-# Presentation ---------------------------------------------------------- #
+    """
+
+    # constructor
+    def __init__(self, initials, full_name):
+        # attributes
+        self.__initials = initials
+        self.__full_name = full_name
+
+    # properties
+    @property
+    def initials(self):
+        return str(self.__initials).strip().upper()
+
+    @initials.setter
+    def initials(self, value):
+        self.__initials = value
+
+    @property
+    def full_name(self):
+        return str(self.__full_name).strip().title()
+
+    @full_name.setter
+    def full_name(self, value):
+        self.__full_name = value
+
+    # methods
+    def to_string(self):
+        """ Explicitly returns a string with this object's data """
+        return self.__str__()
+
+    def __repr__(self):
+        """ Implicitly returns a list with this object's data """
+        return repr([self.initials, self.full_name])

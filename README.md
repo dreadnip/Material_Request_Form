@@ -1,2 +1,8 @@
 # Material Request Form
-This program will prompt the user for asset ids, company names, vendor names, and quantity/price details.<br/>It will then write all this info to a excel template and save it in a specified folder.
+This program obtains user input to fill out a Material request form.<br/>
+The output is written to a Microsoft Excel template with a file name based<br/>
+on the date, time of day, users initials, and vendor name.<br/><br/>
+
+
+
+
